@@ -29,15 +29,31 @@
             "ignorePackages",
             {
             "ts": "never",
-            "tsx": "never"
+            "tsx": "never",
+            "js": "never"
             }
         ],
         "plugin:@typescript-eslint/recommended": "off",
         "no-shadow": "off",
-        "@typescript-eslint/no-shadow": ["error"],
+        // "@typescript-eslint/no-shadow": ["error"],
         "eact/react-in-jsx-scope": "off",
         "react/function-component-definition": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-props-no-spreading": "off",
+        "import/prefer-default-export": "off",
+        "no-restricted-exports": "off",
+        "no-unused-vars": "off",
+        "react/require-default-props": "off",
+        "react/prop-types": "off",
+        "jsx-a11y/anchor-is-valid": "off",
+        "no-redeclare": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+        "react/jsx-no-useless-fragment": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "react/button-has-type": "off",
+        "@typescript-eslint/no-shadow": "off",
+        "react/no-unused-prop-types": "off"
     },
     "settings": {
         "import/resolver": {
