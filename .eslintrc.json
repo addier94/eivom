@@ -53,7 +53,12 @@
         "jsx-a11y/no-static-element-interactions": "off",
         "react/button-has-type": "off",
         "@typescript-eslint/no-shadow": "off",
-        "react/no-unused-prop-types": "off"
+        "react/no-unused-prop-types": "off",
+        "consistent-return": "off",
+        "default-case": "off",
+        "react/destructuring-assignment": "off",
+        "jsx-a11y/no-noninteractive-tabindex": "off",
+        "jsx-a11y/tabindex-no-positive": "off"
     },
     "settings": {
         "import/resolver": {
