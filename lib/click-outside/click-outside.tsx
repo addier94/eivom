@@ -35,7 +35,7 @@ const ClickOutside = ({
       }
     };
   });
-
+  // set innerRef to Nav HTML Tag
   return React.cloneElement(children, { ref: innerRef });
 };
 
