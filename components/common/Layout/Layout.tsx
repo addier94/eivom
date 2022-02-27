@@ -6,10 +6,30 @@ import { Page } from '@type/page';
 import { Category } from '@type/site';
 import { CheckoutProvider } from '@components/checkout/context';
 import { useUI } from '@components/ui/context';
-import { Sidebar } from '@components/ui';
+import { LoadingDots, Sidebar } from '@components/ui';
+import dynamic from 'next/dynamic';
+import { LoginView } from '@components/auth';
 import s from './Layout.module.css';
 import Footer from '../Footer';
 import MenuSidebarView, { Link } from '../UserNav/MenuSidebarView';
+
+const Loading = () => (
+  <div className="w-80 h-80 flex items-center text-center justify-center p-3">
+    <LoadingDots />
+  </div>
+);
+
+const dynamicProps = {
+  loading: Loading,
+};
+
+const Modal = dynamic(
+  () => import('@components/ui/Modal'),
+  {
+    ...dynamicProps,
+    ssr: false,
+  },
+);
 
 interface Props {
   pageProps: {
@@ -17,6 +37,23 @@ interface Props {
     categories: Category[]
   }
 }
+
+const ModalView: FC<{modalView: string; closeModal(): any}> = ({
+  modalView,
+  closeModal,
+}) => (
+  <Modal onClose={closeModal}>
+    {modalView === 'LOGIN_VIEW' && <LoginView />}
+  </Modal>
+);
+
+const ModalUI: FC = () => {
+  const { displayModal, closeModal, modalView } = useUI();
+
+  return displayModal ? (
+    <ModalView modalView={modalView} closeModal={closeModal} />
+  ) : null;
+};
 
 const SidebarView: FC<{
   sidebarView: string,
@@ -54,6 +91,7 @@ const Layout: FC<Props> = ({
       <Navbar links={navBarlinks} />
       <main className="fit">{children}</main>
       <Footer pages={pageProps.pages} />
+      <ModalUI />
       <CheckoutProvider>
         <SidebarUI links={navBarlinks} />
       </CheckoutProvider>
