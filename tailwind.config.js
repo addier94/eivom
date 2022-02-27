@@ -9,11 +9,11 @@ module.exports = {
         '8xl': '1920px',
       },
       colors: {
-        primary: 'var(--primary)',
+        'primary': 'var(--primary)',
         'primary-2': 'var(--primary-2)',
-        secondary: 'var(--secondary)',
+        'secondary': 'var(--secondary)',
         'secondary-2': 'var(--secondary-2)',
-        hover: 'var(--hover)',
+        'hover': 'var(--hover)',
         'hover-1': 'var(--hover-1)',
         'hover-2': 'var(--hover-2)',
         'accent-0': 'var(--accent-0)',
@@ -26,15 +26,15 @@ module.exports = {
         'accent-7': 'var(--accent-7)',
         'accent-8': 'var(--accent-8)',
         'accent-9': 'var(--accent-9)',
-        violet: 'var(--violet)',
+        'violet': 'var(--violet)',
         'violet-light': 'var(--violet-light)',
         'violet-dark': 'var(--violet-dark)',
-        pink: 'var(--pink)',
+        'pink': 'var(--pink)',
         'pink-light': 'var(--pink-light)',
-        cyan: 'var(--cyan)',
-        blue: 'var(--blue)',
-        green: 'var(--green)',
-        red: 'var(--red)',
+        'cyan': 'var(--cyan)',
+        'blue': 'var(--blue)',
+        'green': 'var(--green)',
+        'red': 'var(--red)',
       },
       textColor: {
         base: 'var(--text-base)',
@@ -43,7 +43,7 @@ module.exports = {
       },
       boxShadow: {
         'outline-normal': '0 0 0 2px var(--accent-2)',
-        magical:
+        'magical':
           'rgba(0, 0, 0, 0.02) 0px 30px 30px, rgba(0, 0, 0, 0.03) 0px 0px 8px, rgba(0, 0, 0, 0.05) 0px 1px 0px',
       },
       lineHeight: {

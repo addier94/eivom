@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import Link from 'next/link';
-import { Container, Logo } from '@components/ui';
-import { Searchbar, UserNav } from '@components/common';
+import {Container, Logo} from '@components/ui';
+import {Searchbar, UserNav} from '@components/common';
 import s from './Navbar.module.css';
 import NavbarRoot from './NavbarRoot';
 
@@ -13,7 +13,7 @@ interface NavbarProps {
   links?: Link[]
 }
 
-const Navbar: FC<NavbarProps> = ({ links }) => (
+const Navbar: FC<NavbarProps> = ({links}) => (
   <NavbarRoot>
     <Container>
       <div className={s.nav}>
