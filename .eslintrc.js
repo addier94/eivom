@@ -23,5 +23,9 @@ module.exports = {
   'rules': {
     'max-len': 'off',
     'require-jsdoc': 'off',
+    'no-unused-vars': 'warn',
+    'plugin:react/jsx-runtime': 'off',
+    'react/react-in-jsx-scope': 'off',
+
   },
 };

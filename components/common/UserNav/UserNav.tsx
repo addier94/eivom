@@ -1,16 +1,19 @@
-import { useUI } from '@components/ui/context';
-import React, { FC } from 'react';
+import {useUI} from '@components/ui/context';
+import React, {FC, useState} from 'react';
 import cn from 'clsx';
 import Link from 'next/link';
-import { Heart, Menu } from '@components/icons';
-import { Button } from '@components/ui';
+import {Heart, Menu} from '@components/icons';
+import {Button} from '@components/ui';
 import s from './UserNav.module.css';
+import {Avatar} from '..';
+import DropdownMenu from './DropdownMenu';
 
 interface Props {
   className?: string
 }
 
-const UserNav: FC<Props> = ({ className }) => {
+const UserNav: FC<Props> = ({className}) => {
+  const [customer, setCustomer] = useState(true);
   const {
     toggleSidebar, openModal, setSidebarView, closeSidebarIfPresent,
   } = useUI();
@@ -37,6 +40,17 @@ const UserNav: FC<Props> = ({ className }) => {
           >
             <Menu />
           </Button>
+        </li>
+        <li className={s.item}>
+          { customer ? (
+              <DropdownMenu />
+            ) : (
+              <button className={s.avatarButton}
+                aria-label="Menu"
+                onClick={() => openModal()}>
+                <Avatar />
+              </button>
+            )}
         </li>
       </ul>
     </div>

@@ -1,17 +1,17 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import cn from 'clsx';
-import { Navbar } from '@components/common';
+import {Navbar} from '@components/common';
 
-import { Page } from '@type/page';
-import { Category } from '@type/site';
-import { CheckoutProvider } from '@components/checkout/context';
-import { useUI } from '@components/ui/context';
-import { LoadingDots, Sidebar } from '@components/ui';
+import {Page} from '@type/page';
+import {Category} from '@type/site';
+import {CheckoutProvider} from '@components/checkout/context';
+import {useUI} from '@components/ui/context';
+import {LoadingDots, Sidebar} from '@components/ui';
 import dynamic from 'next/dynamic';
-import { LoginView } from '@components/auth';
+import {LoginView} from '@components/auth';
 import s from './Layout.module.css';
 import Footer from '../Footer';
-import MenuSidebarView, { Link } from '../UserNav/MenuSidebarView';
+import MenuSidebarView, {Link} from '../UserNav/MenuSidebarView';
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -24,11 +24,11 @@ const dynamicProps = {
 };
 
 const Modal = dynamic(
-  () => import('@components/ui/Modal'),
-  {
-    ...dynamicProps,
-    ssr: false,
-  },
+    () => import('@components/ui/Modal'),
+    {
+      ...dynamicProps,
+      ssr: false,
+    },
 );
 
 interface Props {
@@ -48,7 +48,7 @@ const ModalView: FC<{modalView: string; closeModal(): any}> = ({
 );
 
 const ModalUI: FC = () => {
-  const { displayModal, closeModal, modalView } = useUI();
+  const {displayModal, closeModal, modalView} = useUI();
 
   return displayModal ? (
     <ModalView modalView={modalView} closeModal={closeModal} />
@@ -59,14 +59,14 @@ const SidebarView: FC<{
   sidebarView: string,
   closeSidebar(): any,
   links: Link[]
-}> = ({ sidebarView, closeSidebar, links }) => (
+}> = ({sidebarView, closeSidebar, links}) => (
   <Sidebar onClose={closeSidebar}>
     { sidebarView === 'MOBILEMENU_VIEW' && <MenuSidebarView links={links} />}
   </Sidebar>
 );
 
-const SidebarUI: FC<{ links: any}> = ({ links }) => {
-  const { displaySidebar, closeSidebar, sidebarView } = useUI();
+const SidebarUI: FC<{ links: any}> = ({links}) => {
+  const {displaySidebar, closeSidebar, sidebarView} = useUI();
 
   return displaySidebar ? (
     <SidebarView
@@ -79,7 +79,7 @@ const SidebarUI: FC<{ links: any}> = ({ links }) => {
 
 const Layout: FC<Props> = ({
   children,
-  pageProps: { categories = [], ...pageProps },
+  pageProps: {categories = [], ...pageProps},
 }) => {
   const navBarlinks = categories.slice(0, 2).map((c) => ({
     label: c.name,
