@@ -6,3 +6,4 @@ export {default as Menu} from './Menu';
 export {default as ChevronLeft} from './ChevronLeft';
 export {default as Sun} from './Sun';
 export {default as Moon} from './Moon';
+export {default as Info} from './Info';

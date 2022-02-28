@@ -13,7 +13,7 @@ interface Props {
 }
 
 const UserNav: FC<Props> = ({className}) => {
-  const [customer, setCustomer] = useState(true);
+  const [customer, setCustomer] = useState(false);
   const {
     toggleSidebar, openModal, setSidebarView, closeSidebarIfPresent,
   } = useUI();

@@ -1,10 +1,10 @@
 import React, {
   FC, useEffect, useState, useCallback,
 } from 'react';
-import { Logo, Button, Input } from '@components/ui';
+import {Logo, Button, Input} from '@components/ui';
 // import useLogin from '@framework/auth/use-login'
-import { useUI } from '@components/ui/context';
-import { validate } from 'email-validator';
+import {useUI} from '@components/ui/context';
+import {validate} from 'email-validator';
 
 const LoginView: React.FC = () => {
   // Form State
@@ -14,7 +14,7 @@ const LoginView: React.FC = () => {
   const [message, setMessage] = useState('');
   const [dirty, setDirty] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const { setModalView, closeModal } = useUI();
+  const {setModalView, closeModal} = useUI();
 
   // const login = useLogin()
 
@@ -65,13 +65,12 @@ const LoginView: React.FC = () => {
         <Logo width="64px" height="64px" />
       </div>
       <div className="flex flex-col space-y-3">
-        {message && (
+        {true && (
           <div className="text-red border border-red p-3">
             {message}
             . Did you
-            {' '}
             <a
-              className="text-accent-9 inline font-bold hover:underline cursor-pointer"
+              className="text-accent-9 inline font-bold hover:underline cursor-pointer ml-1"
               onClick={() => setModalView('FORGOT_VIEW')}
             >
               forgot your password?
@@ -90,8 +89,7 @@ const LoginView: React.FC = () => {
           Log In
         </Button>
         <div className="pt-1 text-center text-sm">
-          <span className="text-accent-7">Dont have an account?</span>
-          {' '}
+          <span className="text-accent-7 mr-1">Dont have an account?</span>
           <a
             className="text-accent-9 font-bold hover:underline cursor-pointer"
             onClick={() => setModalView('SIGNUP_VIEW')}

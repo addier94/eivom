@@ -8,7 +8,7 @@ import {CheckoutProvider} from '@components/checkout/context';
 import {useUI} from '@components/ui/context';
 import {LoadingDots, Sidebar} from '@components/ui';
 import dynamic from 'next/dynamic';
-import {LoginView} from '@components/auth';
+import {ForgotPassword, LoginView, SignUpView} from '@components/auth';
 import s from './Layout.module.css';
 import Footer from '../Footer';
 import MenuSidebarView, {Link} from '../UserNav/MenuSidebarView';
@@ -44,6 +44,8 @@ const ModalView: FC<{modalView: string; closeModal(): any}> = ({
 }) => (
   <Modal onClose={closeModal}>
     {modalView === 'LOGIN_VIEW' && <LoginView />}
+    {modalView === 'SIGNUP_VIEW' && <SignUpView />}
+    {modalView === 'FORGOT_VIEW' && <ForgotPassword />}
   </Modal>
 );
 

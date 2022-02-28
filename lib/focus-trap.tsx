@@ -1,12 +1,12 @@
-import React, { useEffect, RefObject } from 'react';
-import { tabbable } from 'tabbable';
+import React, {useEffect, RefObject} from 'react';
+import {tabbable} from 'tabbable';
 
 interface Props {
   children: React.ReactNode | any
   focusFirst?: boolean
 }
 
-export default function FocusTrap({ children, focusFirst = false }: Props) {
+export default function FocusTrap({children, focusFirst = false}: Props) {
   const root: RefObject<any> = React.useRef();
   const anchor: RefObject<any> = React.useRef(document.activeElement);
 
@@ -56,12 +56,12 @@ export default function FocusTrap({ children, focusFirst = false }: Props) {
   }, [root, children]);
 
   return React.createElement(
-    'div',
-    {
-      ref: root,
-      className: 'outline-none focus-trap',
-      tabIndex: -1,
-    },
-    children,
+      'div',
+      {
+        ref: root,
+        className: 'outline-none focus-trap',
+        tabIndex: -1,
+      },
+      children,
   );
 }
