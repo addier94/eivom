@@ -26,6 +26,7 @@ module.exports = {
     'no-unused-vars': 'warn',
     'plugin:react/jsx-runtime': 'off',
     'react/react-in-jsx-scope': 'off',
-
+    'new-cap': 'off',
+    'prefer-promise-reject-errors': 'off',
   },
 };

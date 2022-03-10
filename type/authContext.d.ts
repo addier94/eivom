@@ -1,3 +1,4 @@
+import {AUTH, LOGOUT} from '@components/auth/context';
 
 export interface IUser {
   _id : string;
@@ -21,8 +22,8 @@ export interface ContextProps {
 
 // auth Provider
 export type AuthActionType =
-   | { type: '[Auth] - Login', payload: IUser }
-   | { type: '[Auth] - Logout' }
+   | { type: typeof AUTH, payload: IUser }
+   | { type: typeof LOGOUT }
 
 export interface AuthState {
     isLoggedIn: boolean;

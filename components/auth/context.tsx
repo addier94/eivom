@@ -14,18 +14,19 @@ import {eivomApi} from 'api';
 
 export const AuthContext = createContext({} as ContextProps );
 // auth Reducer
-
+export const AUTH = '[Auth] - Login';
+export const LOGOUT = '[Auth] - Logout';
 
 export const authReducer = ( state: AuthState, action: AuthActionType ): AuthState => {
   switch (action.type) {
-    case '[Auth] - Login':
+    case AUTH:
       return {
         ...state,
         isLoggedIn: true,
         user: action.payload,
       };
 
-    case '[Auth] - Logout':
+    case LOGOUT:
       return {
         ...state,
         isLoggedIn: false,
@@ -52,7 +53,7 @@ export const AuthProvider:FC = ({children}) => {
 
   useEffect(() => {
     if ( status === 'authenticated' ) {
-      dispatch({type: '[Auth] - Login', payload: data?.user as IUser});
+      dispatch({type: AUTH, payload: data?.user as IUser});
     }
   }, [status, data]);
 
@@ -70,7 +71,7 @@ export const AuthProvider:FC = ({children}) => {
       const {data} = await eivomApi.get('/user/validate-token');
       const {token, user} = data;
       Cookies.set('token', token );
-      dispatch({type: '[Auth] - Login', payload: user});
+      dispatch({type: AUTH, payload: user});
     } catch (error) {
       Cookies.remove('token');
     }
@@ -82,7 +83,7 @@ export const AuthProvider:FC = ({children}) => {
       const {data} = await eivomApi.post('/user/login', {email, password});
       const {token, user} = data;
       Cookies.set('token', token );
-      dispatch({type: '[Auth] - Login', payload: user});
+      dispatch({type: AUTH, payload: user});
       return true;
     } catch (error) {
       return false;
@@ -95,7 +96,7 @@ export const AuthProvider:FC = ({children}) => {
       const {data} = await eivomApi.post('/user/register', {name, email, password});
       const {token, user} = data;
       Cookies.set('token', token );
-      dispatch({type: '[Auth] - Login', payload: user});
+      dispatch({type: AUTH, payload: user});
       return {
         hasError: false,
       };
