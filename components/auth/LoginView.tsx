@@ -5,60 +5,76 @@ import {Logo, Button, Input} from '@components/ui';
 // import useLogin from '@framework/auth/use-login'
 import {useUI} from '@components/ui/context';
 import {validate} from 'email-validator';
+import {useRouter} from 'next/router';
+import {useForm} from 'react-hook-form';
+import {getProviders, signIn} from 'next-auth/react';
+import s from './SignUpView.module.css';
+import {FormTextWarn, dn} from '@lib/form-style-warn';
+import cn from 'clsx';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {RedirectableProviderType} from 'next-auth/providers';
+
+type FormData = {
+  email : string,
+  password: string,
+};
+
+const SignInSchema = yup.object().shape({
+  email: yup.string().required().email(),
+  password: yup.string().required().min(6),
+});
 
 const LoginView: React.FC = () => {
   // Form State
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-  const [dirty, setDirty] = useState(false);
-  const [disabled, setDisabled] = useState(false);
-  const {setModalView, closeModal} = useUI();
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [loading, setLoading] = useState(false);
+  // const [message, setMessage] = useState('');
+  // const [dirty, setDirty] = useState(false);
+  // const [disabled, setDisabled] = useState(false);
+  // const {setModalView, closeModal} = useUI();
 
   // const login = useLogin()
+  const router = useRouter();
+  // const { loginUser } = useContext( AuthContext );
 
-  const handleLogin = async (e: React.SyntheticEvent<EventTarget>) => {
-    e.preventDefault();
+  const {register, handleSubmit, formState: {errors: err}} = useForm<FormData>({
+    resolver: yupResolver(SignInSchema),
+  });
+  const [showError, setShowError] = useState(false);
+  const {setModalView, closeModal} = useUI();
 
-    if (!dirty && !disabled) {
-      setDirty(true);
-      // handleValidation();
-    }
-
-    // try {
-    //   setLoading(true)
-    //   setMessage('')
-    //   await login({
-    //     email,
-    //     password,
-    //   })
-    //   setLoading(false)
-    //   closeModal()
-    // } catch (e: any) {
-    //   setMessage(e.errors[0].message)
-    //   setLoading(false)
-    //   setDisabled(false)
-    // }
-  };
-
-  const handleValidation = useCallback(() => {
-    // Test for Alphanumeric password
-    const validPassword = /^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password);
-
-    // Unable to send form unless fields are valid.
-    if (dirty) {
-      setDisabled(!validate(email) || password.length < 7 || !validPassword);
-    }
-  }, [email, password, dirty]);
+  const [providers, setProviders] = useState<any>({});
 
   useEffect(() => {
-    handleValidation();
-  }, [handleValidation]);
+    getProviders().then( (prov) => {
+      // console.log({prov});
+      setProviders(prov);
+    });
+  }, []);
 
+  const onLoginUser = async ( {email, password}: FormData ) => {
+    setShowError(false);
+
+    // const isValidLogin = await loginUser( email, password );
+    // if ( !isValidLogin ) {
+    //     setShowError(true);
+    //     setTimeout(() => setShowError(false), 3000);
+    //     return;
+    // }
+    // // Todo: navegar a la pantalla que el usuario estaba
+    // const destination = router.query.p?.toString() || '/';
+    // router.replace(destination);
+    const res = await signIn<RedirectableProviderType>('credentials', {redirect: false, email, password});
+    if (res?.ok) {
+      // closeModal();
+      console.log(res);
+    }
+  };
   return (
     <form
-      onSubmit={handleLogin}
+      onSubmit={handleSubmit(onLoginUser)}
       className="w-80 flex flex-col justify-between p-3"
     >
       <div className="flex justify-center pb-12 ">
@@ -67,7 +83,7 @@ const LoginView: React.FC = () => {
       <div className="flex flex-col space-y-3">
         {true && (
           <div className="text-red border border-red p-3">
-            {message}
+            {showError}
             . Did you
             <a
               className="text-accent-9 inline font-bold hover:underline cursor-pointer ml-1"
@@ -77,14 +93,23 @@ const LoginView: React.FC = () => {
             </a>
           </div>
         )}
-        <Input type="email" placeholder="Email" onChange={setEmail} />
-        <Input type="password" placeholder="Password" onChange={setPassword} />
+        <input
+          className={cn(s.root, {[s.inputWarning]: err.email})}
+          placeholder='Email'
+          { ...register('email')} />
+        {err.email?.message && <FormTextWarn msg={err.email.message} />}
 
+        <input
+          className={cn(s.root, {[s.inputWarning]: err.password})}
+          placeholder='Password'
+          type="password"
+          { ...register('password')} />
+        {err.password?.message && <FormTextWarn msg={err.password.message} />}
         <Button
           variant="slim"
           type="submit"
-          loading={loading}
-          disabled={disabled}
+          // loading={loading}
+          // disabled={disabled}
         >
           Log In
         </Button>

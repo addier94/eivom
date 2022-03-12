@@ -1,5 +1,5 @@
 import cn from 'clsx';
-import React, { InputHTMLAttributes } from 'react';
+import React, {InputHTMLAttributes} from 'react';
 import s from './Input.module.css';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
