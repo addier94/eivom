@@ -51,13 +51,11 @@ export const AuthProvider:FC = ({children}) => {
   const {data, status} = useSession();
   const router = useRouter();
 
-  console.log('status', status);
   useEffect(() => {
     if ( status === 'authenticated' ) {
       dispatch({type: AUTH, payload: data?.user as IUser});
     }
   }, [status, data]);
-
 
   // useEffect(() => {
   //     checkToken();
@@ -117,20 +115,16 @@ export const AuthProvider:FC = ({children}) => {
   };
 
 
-  const logout = () => {
+  const logout = async () => {
     Cookies.remove('cart');
     Cookies.remove('firstName');
     Cookies.remove('lastName');
-    Cookies.remove('address');
-    Cookies.remove('address2');
-    Cookies.remove('zip');
-    Cookies.remove('city');
-    Cookies.remove('country');
-    Cookies.remove('phone');
 
-    signOut();
+    await signOut({redirect: false});
+
+    dispatch({type: LOGOUT});
+    Cookies.remove('token');
     // router.reload();
-    // Cookies.remove('token');
   };
 
 

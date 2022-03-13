@@ -28,5 +28,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'new-cap': 'off',
     'prefer-promise-reject-errors': 'off',
+    'react/prop-types': 'off',
   },
 };

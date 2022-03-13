@@ -1,6 +1,6 @@
 import cn from 'clsx';
 import Link from 'next/link';
-import {FC, useRef, useState, useEffect} from 'react';
+import {FC, useRef, useState, useEffect, useContext} from 'react';
 import {useTheme} from 'next-themes';
 import {useRouter} from 'next/router';
 import s from './DropdownMenu.module.css';
@@ -8,13 +8,13 @@ import {Avatar} from '@components/common';
 import {Moon, Sun} from '@components/icons';
 import {useUI} from '@components/ui/context';
 import ClickOutside from '@lib/click-outside';
-// import useLogout from '@framework/auth/use-logout';
 
 import {
   disableBodyScroll,
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock';
+import {AuthContext} from '@components/auth/context';
 
 interface DropdownMenuProps {
   open?: boolean
@@ -36,7 +36,7 @@ const LINKS = [
 ];
 
 const DropdownMenu: FC<DropdownMenuProps> = ({open = false}) => {
-  // const logout = useLogout();
+  const {logout} = useContext(AuthContext);
   const {pathname} = useRouter();
   const {theme, setTheme} = useTheme();
   const [display, setDisplay] = useState(false);
@@ -110,7 +110,7 @@ const DropdownMenu: FC<DropdownMenuProps> = ({open = false}) => {
             <li>
               <a
                 className={cn(s.link, 'border-t border-accent-2 mt-4')}
-                // onClick={() => logout()}
+                onClick={logout}
               >
                 Logout
               </a>

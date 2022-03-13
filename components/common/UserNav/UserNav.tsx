@@ -1,5 +1,5 @@
 import {useUI} from '@components/ui/context';
-import React, {FC, useState} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import cn from 'clsx';
 import Link from 'next/link';
 import {Heart, Menu} from '@components/icons';
@@ -7,13 +7,14 @@ import {Button} from '@components/ui';
 import s from './UserNav.module.css';
 import {Avatar} from '..';
 import DropdownMenu from './DropdownMenu';
+import {AuthContext} from '@components/auth/context';
 
 interface Props {
   className?: string
 }
 
 const UserNav: FC<Props> = ({className}) => {
-  const [customer, setCustomer] = useState(false);
+  const {isLoggedIn} = useContext(AuthContext);
   const {
     toggleSidebar, openModal, setSidebarView, closeSidebarIfPresent,
   } = useUI();
@@ -42,7 +43,7 @@ const UserNav: FC<Props> = ({className}) => {
           </Button>
         </li>
         <li className={s.item}>
-          { customer ? (
+          { isLoggedIn ? (
               <DropdownMenu />
             ) : (
               <button className={s.avatarButton}

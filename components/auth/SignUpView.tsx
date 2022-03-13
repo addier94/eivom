@@ -1,19 +1,18 @@
-import {FC, useEffect, useState, useCallback, useContext} from 'react';
-import {validate} from 'email-validator';
+import {FC, useState, useContext} from 'react';
 import {Info} from '@components/icons';
 import {useUI} from '@components/ui/context';
-import {Logo, Button, Input} from '@components/ui';
+import {Logo, Button, Alert} from '@components/ui';
 import {useForm} from 'react-hook-form';
 
-import {signIn, getSession} from 'next-auth/react';
+import {signIn} from 'next-auth/react';
 import {AuthContext} from './context';
 import s from './SignUpView.module.css';
 import cn from 'clsx';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {dn, FormTextWarn} from '@lib/form-style-warn';
+import {RedirectableProviderType} from 'next-auth/providers';
 
-// import useSignup from '@framework/auth/use-signup';
 
 type FormData = {
   name : string;
@@ -35,59 +34,29 @@ const SignUpView: FC = () => {
     resolver: yupResolver(SignupSchema),
   });
 
-  const [showError, setShowError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onRegisterForm = async ( {name, email, password}: FormData ) => {
-    setShowError(false);
+    setLoading(true);
     const {hasError, message} = await registerUser(name, email, password);
 
     if ( hasError ) {
-      setShowError(true);
-      setErrorMessage( message! );
-      setTimeout(() => setShowError(false), 3000);
+      setShowError(message!);
+      setLoading(false);
       return;
     }
-    // Todo: navegar a la pantalla que el usuario estaba
-    // const destination = router.query.p?.toString() || '/';
-    // router.replace(destination);
-    await signIn('credentials', {email, password});
+
+    const res = await signIn<RedirectableProviderType>('credentials', {redirect: false, email, password});
+    if (res?.ok) {
+      closeModal();
+    }
+    setLoading(false);
   };
-  // Form State
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [loading, setLoading] = useState(false);
-  // const [message, setMessage] = useState('');
-  // const [dirty, setDirty] = useState(false);
-  // const [disabled, setDisabled] = useState(false);
 
 
   const {setModalView, closeModal} = useUI();
 
-  // const handleSignup = async (e: React.SyntheticEvent<EventTarget>) => {
-  //   e.preventDefault();
-
-  //   if (!dirty && !disabled) {
-  //     setDirty(true);
-  //     handleValidation();
-  //   }
-  // };
-
-  // const handleValidation = useCallback(() => {
-
-  //   const validPassword = /^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password);
-
-
-  //   if (dirty) {
-  //     setDisabled(!validate(email) || password.length < 7 || !validPassword);
-  //   }
-  // }, [email, password, dirty]);
-
-  // useEffect(() => {
-  //   handleValidation();
-  // }, [handleValidation]);
 
   return (
     <form
@@ -98,9 +67,7 @@ const SignUpView: FC = () => {
         <Logo width="64px" height="64px" />
       </div>
       <div className="flex flex-col space-y-4">
-        {errorMessage && (
-          <div className="text-red border border-red p-3">{errorMessage}</div>
-        )}
+        {showError && <Alert msg={showError} setShowError={setShowError} />}
         <input
           className={dn(s.root, s.inputWarning, err.name?.message)}
           placeholder='Name'
@@ -133,8 +100,7 @@ const SignUpView: FC = () => {
           <Button
             variant="slim"
             type="submit"
-            // loading={loading}
-            // disabled={disabled}
+            loading={loading}
           >
             Sign Up
           </Button>
