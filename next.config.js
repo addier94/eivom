@@ -9,6 +9,9 @@ const nextConfig = {
     // a non-locale prefixed path e.g. `/hello`
     defaultLocale: 'en-US',
   },
+  images: {
+    domains: ['image.tmdb.org'],
+  },
 };
 
 module.exports = nextConfig;

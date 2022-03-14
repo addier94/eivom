@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.8",
+    "@react-spring/web": "^9.4.4",
     "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
     "body-scroll-lock": "^4.0.0-beta.0",
@@ -17,6 +18,7 @@
     "email-validator": "^2.0.4",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
+    "keen-slider": "^6.6.4",
     "lodash.random": "^3.2.0",
     "lodash.throttle": "^4.1.1",
     "mongoose": "^6.2.5",
