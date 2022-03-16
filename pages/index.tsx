@@ -1,5 +1,5 @@
 import {Layout} from '@components/common';
-import {MovieView} from '@components/Movie';
+import {MovieSliderView} from '@components/MovieSlider';
 import {GetMoviesType} from '@type/themovie/moviesType';
 import useFetch from 'hooks/useMovies';
 
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
 
-      { data && <MovieView NowPlaying={data} /> }
+      { data && <MovieSliderView NowPlaying={data} /> }
     </>
   );
 }

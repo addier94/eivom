@@ -44,7 +44,6 @@ const MovieSlider: React.FC<MovieSliderProps> = ({
       }
     },
   });
-  console.log('isMounted  ', isMounted);
   // Stop the history navigation gesture on touch devices
   useEffect(() => {
     const preventNavigation = (event: TouchEvent) => {
@@ -107,6 +106,8 @@ const MovieSlider: React.FC<MovieSliderProps> = ({
         {slider &&
           Children.map(children, (child, idx) => {
             if (isValidElement(child)) {
+              // const newChild = child.props.children.slice(0, 1);
+
               return {
                 ...child,
                 props: {

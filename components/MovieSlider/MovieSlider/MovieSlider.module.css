@@ -6,6 +6,10 @@
 .slider {
   @apply relative h-full transition-opacity duration-150;
   opacity: 0;
+  img {
+    object-fit: contain!important;
+    object-position: left;
+  }
 }
 
 .slider.show {

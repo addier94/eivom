@@ -1,6 +1,6 @@
 import cn from 'clsx';
 import {inherits} from 'util';
-import s from './MovieTag.module.css';
+import s from './MovieSliderTag.module.css';
 
 interface MovieTagProps {
   className?: string
@@ -9,7 +9,7 @@ interface MovieTagProps {
   fontSize?: number
 }
 
-const MovieTag: React.FC<MovieTagProps> = ({
+const MovieSliderTag: React.FC<MovieTagProps> = ({
   name,
   price,
   className = '',
@@ -33,4 +33,4 @@ const MovieTag: React.FC<MovieTagProps> = ({
   );
 };
 
-export default MovieTag;
+export default MovieSliderTag;
