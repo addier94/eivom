@@ -9,7 +9,6 @@ import s from './MovieSliderView.module.css';
 
 const MovieSliderView = ({NowPlaying}:{NowPlaying: GetMoviesType}) => {
   const {results} = NowPlaying;
-
   return (
     <>
       <Container className='max-w-none w-full' clean>
@@ -23,16 +22,15 @@ const MovieSliderView = ({NowPlaying}:{NowPlaying: GetMoviesType}) => {
                     <Image
                       // className={s.img}
                       objectFit="cover"
-                      src={`${PATH_IMAGE}/${item.poster_path}`}
+                      src={`${PATH_IMAGE}/${item.backdrop_path}`}
                       width={600}
-                      height={600}
+                      height={330}
                       priority={i === 0}
                       quality="85"
 
                     />
                     <MovieSliderTag
-                      name={item.title}
-                      price='38'
+                      movie={item}
                       fontSize={32}
                     />
                   </div>

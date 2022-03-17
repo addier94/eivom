@@ -17,7 +17,7 @@
 }
 
 .imageContainer {
-  @apply h-full relative;
+  @apply relative;
 }
 
 .imageContainer > span {

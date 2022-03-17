@@ -1,20 +1,21 @@
+import {ResultMovies} from '@type/themovie/moviesType';
 import cn from 'clsx';
-import {inherits} from 'util';
+import {getReleaseDate} from 'utils/format-date';
+// import {inherits} from 'util';
 import s from './MovieSliderTag.module.css';
 
 interface MovieTagProps {
   className?: string
-  name: string
-  price: string
+  movie: ResultMovies
   fontSize?: number
 }
 
 const MovieSliderTag: React.FC<MovieTagProps> = ({
-  name,
-  price,
+  movie,
   className = '',
   fontSize = 32,
 }) => {
+  console.log(movie);
   return (
     <div className={cn(s.root, className)}>
       <h3 className={s.name}>
@@ -25,10 +26,10 @@ const MovieSliderTag: React.FC<MovieTagProps> = ({
             lineHeight: `${fontSize}px`,
           }}
         >
-          {name}
+          {movie.title}
         </span>
       </h3>
-      <div className={s.price}>{price}</div>
+      <div className={s.price}>{getReleaseDate(movie.release_date)}</div>
     </div>
   );
 };

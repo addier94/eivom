@@ -106,12 +106,16 @@ const MovieSlider: React.FC<MovieSliderProps> = ({
         {slider &&
           Children.map(children, (child, idx) => {
             if (isValidElement(child)) {
-              // const newChild = child.props.children.slice(0, 1);
+              // child has props property, inside we make some changes
+              const propsUpdated = {
+                className: child.props.className, // maintain className
+                children: child.props.children.slice(0, 1), // remove 0 position object inside array children
+              };
 
               return {
                 ...child,
                 props: {
-                  ...child.props,
+                  ...propsUpdated,
                   className: cn(child.props.className, s.thumb, {
                     [s.selected]: currentSlide === idx,
                   }),
