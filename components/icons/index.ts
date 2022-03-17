@@ -9,3 +9,4 @@ export {default as Moon} from './Moon';
 export {default as Info} from './Info';
 export {default as ArrowRight} from './ArrowRight';
 export {default as ArrowLeft} from './ArrowLeft';
+export {default as Star} from './Star';

@@ -1,3 +1,4 @@
+import Rating from '@components/ui/Rating';
 import {ResultMovies} from '@type/themovie/moviesType';
 import cn from 'clsx';
 import {getReleaseDate} from 'utils/format-date';
@@ -15,7 +16,6 @@ const MovieSliderTag: React.FC<MovieTagProps> = ({
   className = '',
   fontSize = 32,
 }) => {
-  console.log(movie);
   return (
     <div className={cn(s.root, className)}>
       <h3 className={s.name}>
@@ -30,6 +30,8 @@ const MovieSliderTag: React.FC<MovieTagProps> = ({
         </span>
       </h3>
       <div className={s.price}>{getReleaseDate(movie.release_date)}</div>
+      <p>{movie.vote_average}</p>
+      <Rating value={4} />
     </div>
   );
 };
