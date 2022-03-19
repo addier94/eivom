@@ -24,8 +24,12 @@
   padding-top: 1.5rem;
 }
 
-.root .price {
-  @apply pt-2 px-6 pb-4 text-sm bg-primary text-accent-9
+.root .dateRelease {
+  @apply px-6 py-2 text-sm bg-primary text-accent-6
   font-semibold inline-block tracking-wide;
-  margin-top: -1px;
+  font-size: inherit;
+  letter-spacing: inherit;
+}
+.wrapRating {
+  @apply  px-6 py-3 bg-primary 
 }

@@ -16,6 +16,7 @@ const MovieSliderTag: React.FC<MovieTagProps> = ({
   className = '',
   fontSize = 32,
 }) => {
+  console.log(movie);
   return (
     <div className={cn(s.root, className)}>
       <h3 className={s.name}>
@@ -29,9 +30,8 @@ const MovieSliderTag: React.FC<MovieTagProps> = ({
           {movie.title}
         </span>
       </h3>
-      <div className={s.price}>{getReleaseDate(movie.release_date)}</div>
-      <p>{movie.vote_average}</p>
-      <Rating value={4} />
+      <div className={s.dateRelease}>{getReleaseDate(movie.release_date)}</div><br />
+      <Rating value={Math.round(movie.vote_average)} count={movie.vote_count} className={s.wrapRating} />
     </div>
   );
 };
