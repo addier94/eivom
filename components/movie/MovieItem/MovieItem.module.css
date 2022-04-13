@@ -1,0 +1,17 @@
+.cardBlock{
+  @apply bg-green relative;
+  width: calc(100% - 2 * .5rem); 
+  margin: .5rem;
+  @screen sm {
+    width: calc(50% - 2 * .5rem);
+  }
+  @screen md {
+    width: calc(33.33333% - 2 * .5rem);
+  }
+  @screen lg {
+    width: calc(25% - 2 * .5rem);
+  }
+  @screen xl {
+    width: calc(20% - 2 * .5rem);
+  }
+}

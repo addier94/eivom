@@ -1,0 +1,7 @@
+.root {
+  @apply flex my-8 mx-auto;
+}
+
+.root a {
+  @apply bg-secondary text-secondary ml-3 px-3 py-1;
+}

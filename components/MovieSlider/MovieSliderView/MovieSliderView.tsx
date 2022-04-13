@@ -39,6 +39,9 @@ const MovieSliderView = ({NowPlaying}:{NowPlaying: GetMoviesType}) => {
               </MovieSlider>
             </div>
           </div>
+          <div className='bg-primary text-primary'>
+              nice jos
+          </div>
         </div>
       </Container>
     </>

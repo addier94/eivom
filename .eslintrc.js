@@ -29,6 +29,6 @@ module.exports = {
     'new-cap': 'off',
     'prefer-promise-reject-errors': 'off',
     'react/prop-types': 'off',
-    // 'camelcase': 'off',
+    'camelcase': 'off',
   },
 };
