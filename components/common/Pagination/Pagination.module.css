@@ -1,7 +1,10 @@
 .root {
-  @apply flex my-8 mx-auto;
+  @apply flex my-8 justify-center;
 }
 
-.root a {
+.pageLink {
   @apply bg-secondary text-secondary ml-3 px-3 py-1;
+}
+.activePagination {
+  @apply bg-violet text-white;
 }
