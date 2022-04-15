@@ -20,7 +20,8 @@ const MovieView = () => {
 
   const fetchMovies = () => {
     getData(`/movie/popular?page=${currentPage}`)
-        .then(({data}) => setMovies(data));
+        .then(({data}) => setMovies(data))
+        .catch((e) => console.log('first'));
   };
 
   useEffect(() => {

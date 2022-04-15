@@ -16,12 +16,15 @@ const Pagination:FC<Props> = ({callback, currentPage}) => {
 
   return (
     <div className={s.root}>
-      <ArrowLeft className="bg-secondary text-secondary cursor-pointer h-8 w-6" />
+      {currentPage !== 1 &&
+      <ArrowLeft onClick={() => callback(currentPage! - 1)} className="bg-secondary text-secondary cursor-pointer h-8 w-6" />
+      }
       <ButtonPagination c={currentPage} callback={callback} limit={limit} />
       <p className='text-primary ml-3 px-3 pb-1 font-bold text-xl'>...</p>
       <button className={s.pageLink}
         onClick={() => callback(limit)}>{limit}</button>
       {limit !== currentPage && <ArrowRight
+        onClick={() => callback(currentPage! + 1)}
         className="bg-secondary text-secondary ml-3 cursor-pointer h-8 w-6" /> }
 
     </div>
