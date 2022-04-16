@@ -1,8 +1,7 @@
 import {Layout} from '@components/common';
 import {MovieView} from '@components/movie';
 
-
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <MovieView />
@@ -10,4 +9,5 @@ export default function Home() {
   );
 }
 
-Home.Layout = Layout;
+HomePage.Layout = Layout;
+
